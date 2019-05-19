@@ -1,26 +1,45 @@
-import React from 'react';
+import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Button from './button-component/button-component';
+import ImageComponent from './image-component/image-component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+    constructor(props){
+      super(props);
+      this.onClickDoThis = this.onClickDoThis.bind(this);
+      this.state = {
+        showImage: false,
+        buttonText: "Click Me"
+      }
+    }
+
+    onClickDoThis(){
+      this.setState({
+        showImage: !this.state.showImage
+      });
+    }
+
+    render(){
+      console.log(this.state)
+      return (
+        <div className="App">
+          <div className="button-container">
+            <Button clickThis={this.onClickDoThis}/>
+          </div>
+            {
+              this.state.showImage 
+              ? 
+              <div className="image container" >
+                <ImageComponent/> 
+              </div>
+              : 
+              null
+            }
+        </div>
+      );
+    }
 }
 
 export default App;
